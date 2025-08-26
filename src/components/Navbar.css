@@ -1,0 +1,163 @@
+/* =========================
+   NAVBAR (sticky, responsive)
+   ========================= */
+
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* bar dalam (pakai .container global) */
+.nav-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px; /* sedikit lebih lega */
+}
+
+/* brand/logo */
+.brand{
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--brand-dark);
+  font-weight: 700;
+  line-height: 1;
+}
+.brand img{
+  display: block;
+}
+
+/* =========================
+   MENU (desktop default)
+   ========================= */
+.nav-menu{
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu a{
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #111827;
+  transition: background .2s, color .2s, box-shadow .2s;
+  outline: none;
+}
+.nav-menu a:hover,
+.nav-menu a:focus-visible{
+  background: #f3faf7;
+  color: #0B5F44;
+  box-shadow: 0 0 0 2px #dcfce7 inset;
+}
+.nav-menu a.active{
+  background: #def7ec;
+  color: var(--brand-dark);
+  font-weight: 700;
+}
+
+/* =========================
+   HAMBURGER (button)
+   ========================= */
+.hamburger{
+  display: none;              /* tampilkan di mobile saja */
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  margin: 0;
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 10px;
+}
+.hamburger:focus-visible{
+  box-shadow: 0 0 0 2px #bfdbfe inset;
+}
+.hamburger span{
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: #111827;
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.hamburger span + span{ margin-top: 5px; }
+.hamburger.active span:nth-child(1){ transform: rotate(45deg) translateY(8px); }
+.hamburger.active span:nth-child(2){ opacity: 0; }
+.hamburger.active span:nth-child(3){ transform: rotate(-45deg) translateY(-8px); }
+
+/* =========================
+   MOBILE
+   ========================= */
+@media (max-width: 768px){
+  /* tampilkan tombol */
+  .hamburger{ display: inline-flex; }
+
+  /* menu menjadi panel drop di bawah bar */
+  .nav-menu{
+    position: absolute;
+    top: 64px;        /* tepat di bawah navbar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    z-index: 99;
+
+    /* tersembunyi default, tapi tetap measurable untuk animasi */
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height .25s ease, opacity .18s ease, visibility 0s linear .25s;
+  }
+
+  .nav-menu.open{
+    max-height: 60vh;         /* cukup tinggi untuk isi menu */
+    opacity: 1;
+    visibility: visible;
+    transition: max-height .25s ease, opacity .18s ease, visibility 0s;
+  }
+
+  .nav-menu li + li{ border-top: 1px solid #f1f5f9; }
+
+  .nav-menu a{
+    display: block;
+    padding: 14px 16px;       /* nyaman untuk jempol */
+    border-radius: 0;
+  }
+
+  .nav-menu a:hover,
+  .nav-menu a:focus-visible{
+    background: #f0fdf4;
+    color: #065f46;
+    box-shadow: none;
+  }
+
+  .nav-menu a.active{
+    background: #def7ec;
+    color: #065f46;
+    font-weight: 700;
+  }
+}
+
+/* =========================
+   Reduce motion (aksesibilitas)
+   ========================= */
+@media (prefers-reduced-motion: reduce){
+  .nav-menu,
+  .hamburger span{
+    transition: none !important;
+  }
+}

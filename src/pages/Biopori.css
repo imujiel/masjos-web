@@ -1,0 +1,269 @@
+/* =========================
+   HALAMAN BIOPORI
+   ========================= */
+.biopori-page { position: relative; }
+
+/* NAV mini di dalam halaman (TETAP TAJAM / TIDAK BLUR) */
+.bi-nav {
+  max-width: 900px;
+  margin: 16px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+/* =========================
+   WRAPPER KONTEN — diblur saat modal tampil
+   ========================= */
+.bi-content-wrap{
+  transition: filter .45s ease, opacity .45s ease;
+}
+.bi-content-wrap.is-blurred{
+  filter: blur(12px) saturate(85%);
+  opacity: .38;
+  pointer-events: none;
+}
+
+/* =========================
+   MODAL LOGIN (layer) + ANIMASI
+   Catatan: Kita pakai .bi-modal-layer (bukan backdrop-filter),
+   supaya navbar tidak ikut blur/gelap.
+   ========================= */
+.bi-modal-layer{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 60;
+  animation: biModalLayerIn .35s ease both;
+}
+@keyframes biModalLayerIn{
+  from{ opacity: 0; }
+  to  { opacity: 1; }
+}
+
+.bi-modal{
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.18);
+  padding: 22px;
+  animation: biPopIn 420ms cubic-bezier(.22,.9,.3,1) both;
+  will-change: transform, opacity;
+}
+.bi-modal__title { margin-bottom: 6px; }
+
+/* Form modal: input full, tombol kanan */
+.bi-modal form{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Input */
+.bi-input{
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 10px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  background:#fff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.bi-input::placeholder{ color:#9ca3af; }
+.bi-input:focus{
+  outline: none;
+  border-color: #86efac;
+  box-shadow: 0 0 0 4px #dcfce7;
+}
+
+/* Tombol di modal nempel kanan */
+.bi-modal .bi-btn{ justify-self: end; height: 44px; }
+
+/* Responsif: tombol turun ke bawah & full width */
+@media (max-width: 480px){
+  .bi-modal form{ grid-template-columns: 1fr; }
+  .bi-modal .bi-btn{ width: 100%; justify-self: stretch; }
+}
+
+/* Animasi popup */
+@keyframes biPopIn{
+  0%   { opacity:0; transform: translateY(8px) scale(.98); }
+  100% { opacity:1; transform: translateY(0)   scale(1);   }
+}
+@media (prefers-reduced-motion: reduce){
+  .bi-modal-layer, .bi-modal { animation:none; }
+}
+
+/* =========================
+   (OPSIONAL / KOMPAT) — gaya lama backdrop
+   Tidak dipakai oleh JSX sekarang, aman dibiarkan.
+   ========================= */
+.bi-modal-backdrop{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.35);
+  z-index: 50;
+  padding: 16px;
+  -webkit-backdrop-filter: saturate(120%) blur(2px);
+  backdrop-filter: saturate(120%) blur(2px);
+  animation: biFadeBackdrop 360ms ease-out both;
+  will-change: opacity, backdrop-filter;
+}
+@keyframes biFadeBackdrop{
+  0%   { opacity:0; -webkit-backdrop-filter:saturate(100%) blur(0px); backdrop-filter:saturate(100%) blur(0px); }
+  100% { opacity:1; -webkit-backdrop-filter:saturate(120%) blur(2px); backdrop-filter:saturate(120%) blur(2px); }
+}
+
+/* =========================
+   LAYOUT KONTEN
+   ========================= */
+.bi-main-900 { max-width: 900px;  margin: 16px auto 24px; }
+.bi-main-1000{ max-width: 1000px; margin: 16px auto 24px; }
+
+/* Kartu umum */
+.bi-card{
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 24px;
+  background:#fff;
+}
+.bi-center { text-align: center; }
+.bi-score  { font-size: 22px; font-weight: 700; margin: 0 0 24px; }
+
+/* Utilities */
+.bi-row-sb     { display:flex; justify-content:space-between; align-items:center; }
+.bi-row-center { display:flex; justify-content:center; }
+.bi-flex-gap10 { display:flex; gap:10px; }
+.bi-gap12      { gap:12px; }
+.bi-mb8{ margin-bottom:8px; } .bi-mb16{ margin-bottom:16px; } .bi-mb24{ margin-bottom:24px; }
+.bi-mt16{ margin-top:16px; }
+.bi-text-666 { color:#666; } .bi-text-555 { color:#555; } .bi-text-647 { color:#64748b; }
+.bi-fs18{ font-size:18px; } .bi-fw700{ font-weight:700; }
+
+/* =========================
+   QUIZ (choices)
+   ========================= */
+.bi-grid-gap12 { display: grid; gap: 12px; }
+.bi-choice{
+  text-align:left;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  cursor:pointer;
+  background:#fff;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition: background .12s ease, border-color .12s ease;
+}
+.bi-choice:hover{ background:#f8fafc; border-color:#cbd5e1; }
+.bi-choice:disabled{ cursor:default; opacity:.95; }
+.bi-choice-pill{
+  display:inline-flex;
+  width:28px; height:28px;
+  align-items:center; justify-content:center;
+  border-radius:8px;
+  background:#f3f4f6;
+  margin-right:10px;
+  font-weight:700;
+}
+.bi-choice--correct{ background:#dcfce7; border-color:#86efac; }
+.bi-choice--wrong  { background:#fee2e2; border-color:#fca5a5; }
+
+/* Feedback */
+.bi-feedback-ok  { color:#15803d; font-weight:700; }
+.bi-feedback-bad { color:#b91c1c; font-weight:700; }
+
+/* =========================
+   TOMBOL (global)
+   ========================= */
+.bi-btn{
+  appearance:none; -webkit-appearance:none;
+  border:none; outline:none;
+  height:40px;
+  padding: 10px 16px;
+  border-radius:8px;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center; justify-content:center;
+  cursor:pointer;
+  background:#e5e7eb;
+  color:inherit;
+  transition: transform .12s ease, filter .12s ease, opacity .12s ease;
+}
+.bi-btn:active{ transform: translateY(1px); }
+
+.bi-btn-primary{
+  background: var(--brand) !important;
+  color:#fff !important;
+  border:none !important;
+  border-radius:10px;
+  font-weight:700;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
+}
+.bi-btn-primary:hover{ filter: brightness(1.05); }
+.bi-btn-primary:focus-visible{ outline:2px solid #86efac; outline-offset:2px; }
+
+.bi-btn-info { background:#0ea5e9; color:#fff; border-radius:8px; font-weight:600; }
+.bi-btn-info:hover{ filter:brightness(1.05); }
+.bi-btn-slate{ background:#64748b; color:#fff; border-radius:8px; font-weight:600; }
+.bi-btn-slate:hover{ filter:brightness(1.05); }
+
+/* =========================
+   DRAG & DROP
+   ========================= */
+.bi-center-row { display:flex; justify-content:center; }
+.bi-drag-item{
+  user-select:none;
+  padding:16px;
+  border:1px dashed #bbb;
+  border-radius:12px;
+  min-width:260px;
+  text-align:center;
+  font-weight:700;
+  background:#fff;
+}
+.bi-drag-img{ max-width:180px; display:block; margin:0 auto 8px; }
+
+.bi-bins{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+  align-items:stretch;
+}
+.bi-drop-bin{
+  min-height:180px;
+  border:2px dashed #cbd5e1;
+  border-radius:14px;
+  padding:16px;
+  background:#f8fafc;
+  display:grid; place-items:center;
+  text-align:center;
+  font-weight:700;
+  transition: background 120ms ease;
+}
+.bi-drop-success{ background:#dcfce7; }
+.bi-drop-error  { background:#fee2e2; }
+
+/* ===== Page fade-in khusus Biopori (opsional) ===== */
+.bi-enter{
+  animation: biPageIn .52s cubic-bezier(.22,.9,.3,1) both;
+  will-change: opacity, filter;
+}
+@keyframes biPageIn{
+  from{ opacity:0; filter: blur(10px); }
+  to  { opacity:1; filter: blur(0); }
+}

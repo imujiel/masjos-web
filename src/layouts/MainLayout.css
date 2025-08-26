@@ -1,0 +1,86 @@
+/* ===== MainLayout.css ===== */
+
+/* Skip link: terlihat saat fokus (aksesibilitas) */
+.skip-link{
+  position:absolute;
+  left:-9999px; top:auto;
+  width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  position:fixed; left:16px; top:16px; z-index:10000;
+  width:auto; height:auto;
+  padding:10px 14px;
+  background:#111827; color:#fff;
+  border-radius:8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+/* Wrapper halaman yang merender <Outlet /> */
+.page{
+  padding-block: 24px;
+  /* jika Navbar fixed: tambahkan class 'with-fixed-navbar' pada <body> lalu aktifkan baris di bawah */
+  /* padding-top: 80px; */
+}
+
+/* Opsi jika Navbar fixed via class pada <body> */
+body.with-fixed-navbar .page{ padding-top: 80px; }
+
+/* Footer */
+.footer{
+  border-top: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #374151;
+  padding: 16px 0;
+}
+
+/* Debug overlay hanya di dev */
+.debug-bar{
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  z-index: 9999;
+  background: #111827;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: .85;
+  pointer-events: none;
+}
+
+/* Responsif kecil */
+@media (max-width: 640px){
+  .page{ padding-block: 20px; }
+  .footer{ padding: 14px 0; }
+}
+
+/* =========================================================
+   ROUTE FADE + BLUR
+   Akan jalan tiap kali pathname berubah (key di MainLayout)
+   ========================================================= */
+.route-fade-blur{
+  animation: routeFadeBlur 520ms cubic-bezier(.22,.9,.3,1) both;
+  will-change: opacity, transform, filter;
+}
+
+/* Hormati preferensi user */
+@media (prefers-reduced-motion: reduce){
+  .route-fade-blur{ animation: none !important; }
+}
+
+@keyframes routeFadeBlur{
+  0%{
+    opacity: 0;
+    transform: translateY(8px) scale(.995);
+    filter: blur(10px);
+  }
+  60%{
+    opacity: 1;
+    filter: blur(2px);
+  }
+  100%{
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}

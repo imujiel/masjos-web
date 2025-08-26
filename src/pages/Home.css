@@ -1,0 +1,211 @@
+/* ===== Theme helper (pakai variable dari global.css bila ada) ===== */
+:root{
+  --brand:#0FA36B;
+  --brand-dark:#0B5F44;
+  --info:#2A7DE1;
+  --text:#111827;
+  --muted:#6B7280;
+  --card:#F3F4F6;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* ===== HERO (full-bleed) ===== */
+.hero{position:relative; min-height: clamp(380px, 55vh, 520px); display:grid; align-items:end}
+.hero__bg{position:absolute; inset:0; background:#d1fae5; background-size:cover; background-position:center; filter:saturate(1.05)}
+.hero__overlay{position:absolute; inset:0; background:linear-gradient(180deg,#00000066, #00000055 35%, #00000033 70%, #0000)}
+.hero__content{position:relative; padding-block:28px; color:#fff}
+.hero h1{font-size:clamp(26px, 5vw, 44px); line-height:1.1; margin-top:8px}
+.lead{font-size:clamp(14px, 2.6vw, 18px); opacity:.95; max-width:60ch}
+.hero__cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
+
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.chip{background:#ffffffd9;border:1px solid #e5e7eb;padding:6px 10px;border-radius:999px;font-weight:600;font-size:14px}
+
+/* ===== SECTION TITLE ===== */
+.section__title{font-size:clamp(20px, 3vw, 28px); margin-bottom:16px}
+
+/* ===== STEPS (5 cards) ===== */
+.steps{display:grid; gap:16px; grid-template-columns:1fr 1fr}
+@media (min-width:768px){ .steps{grid-template-columns:repeat(3,1fr)} }
+@media (min-width:1050px){ .steps{grid-template-columns:repeat(5,1fr)} }
+.stepcard{background:#fff;border:1px solid #e5e7eb;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);height:100%}
+.stepcard .thumb{height:140px;background:#e0efe7;background-size:cover;background-position:center}
+.stepcard .pad{padding:12px}
+.stepcard h3{margin:0 0 6px;font-size:18px}
+.stepcard p{margin:0;color:var(--muted)}
+
+/* ===== CATEGORIES (4 banners) ===== */
+.cats{display:grid; gap:16px; grid-template-columns:1fr 1fr}
+@media (min-width:1050px){ .cats{grid-template-columns:repeat(4,1fr)} }
+.banner{position:relative; min-height:200px; border-radius:18px; overflow:hidden; box-shadow:var(--shadow); border:1px solid #e5e7eb}
+.banner__bg{position:absolute; inset:0; background:#dfe7ff; background-size:cover; background-position:center}
+.banner__overlay{position:absolute; inset:0; background:linear-gradient( to bottom, #00000088, #00000044 60%, #0000 )}
+.banner__content{position:relative; color:#fff; padding:14px}
+.banner h3{margin:0 0 6px;font-size:20px}
+.banner ul{margin:0 0 6px; padding-left:18px}
+.banner .tip{margin:0; font-weight:700}
+.tone-green .banner__overlay{background:linear-gradient( to bottom, #064e3bB3, #064e3b66 60%, #0000 )}
+.tone-blue  .banner__overlay{background:linear-gradient( to bottom, #1e3a8aB3, #1e3a8a66 60%, #0000 )}
+.tone-red   .banner__overlay{background:linear-gradient( to bottom, #7f1d1dB3, #7f1d1d66 60%, #0000 )}
+.tone-zinc  .banner__overlay{background:linear-gradient( to bottom, #111827B3, #11182766 60%, #0000 )}
+
+/* ===== METHODS STRIP ===== */
+.methods{display:flex; gap:8px; list-style:none; padding:0; margin:0 0 10px; overflow:auto}
+.method{border:1px solid #e5e7eb;background:#fff;padding:8px 12px;border-radius:999px;white-space:nowrap;flex:0 0 auto;cursor:pointer}
+.method:hover{background:#f9fafb}
+
+/* ===== MAP CTA (image banner) ===== */
+.mapcta{position:relative; margin-block:28px}
+.mapcta__bg{position:absolute; inset:0; background:#cfe2ff; background-size:cover; background-position:center; filter:blur(1px) saturate(1.1)}
+.mapcta__overlay{position:absolute; inset:0; background:#1d4ed8aa}
+.mapcta__content{position:relative; color:#fff; padding-block:40px}
+.mapcta__content h3{font-size:clamp(18px,3vw,26px); margin-bottom:6px}
+
+/* ===== MODAL generic ===== */
+.modal{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display:flex; align-items:center; justify-content:center;
+  z-index: 1000;
+}
+.modal__content{
+  background:#fff; color:#111827;
+  width:min(640px, 92vw);
+  border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.2);
+  padding:20px 20px 16px; position:relative;
+  max-height:90vh; overflow:auto;
+}
+.modal__close{
+  position:absolute; top:10px; right:12px;
+  background:transparent; border:none; font-size:28px; line-height:1;
+  cursor:pointer; color:#6b7280;
+}
+.modal__img{
+  width:100%; height:auto; border-radius:12px; margin:10px 0 12px;
+  background:#f3f4f6; object-fit:cover;
+}
+.modal__list{ margin:8px 0 12px; padding-left:18px; }
+.modal__tips{
+  background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0;
+  padding:10px 12px; border-radius:12px; font-weight:600; margin-bottom:8px;
+}
+.modal__actions{ display:flex; justify-content:flex-end; gap:8px; }
+
+/* chips aktif */
+.method.is-active{ background:#def7ec; border-color:#bde5d7; color:#065f46; font-weight:700 }
+
+/* panel detail inline */
+.method-panel{
+  display:grid; gap:16px; align-items:start; margin-top:12px;
+  grid-template-columns: 1fr;
+  border:1px solid #e5e7eb; background:#fff; border-radius:16px; box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.method-img{
+  min-height:180px; background:#e6f4ea; background-size:cover; background-position:center;
+}
+.method-body{ padding:14px }
+.method-body h3{ margin:0 0 6px; font-size:20px }
+.method-list{ margin:6px 0 10px; padding-left:18px }
+.method-tips{
+  margin:0;
+  background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0;
+  padding:8px 10px; border-radius:10px; font-weight:600;
+}
+@media (min-width:800px){
+  .method-panel{ grid-template-columns: 1.1fr 1.2fr; }
+}
+
+/* Tombol umum */
+.btn {
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:600;
+  text-decoration:none;
+  transition:background .25s, color .25s, transform .2s;
+}
+
+/* Hover umum: sedikit naik */
+.btn:hover,
+.btn:focus-visible {
+  transform:translateY(-2px);
+}
+
+/* Varian putih */
+.btn.white {
+  background:#fff;
+  color:#111827;
+  border:1px solid #e5e7eb;
+}
+.btn.white:hover,
+.btn.white:focus-visible {
+  background:#f9fafb;   /* sedikit abu terang */
+  color:#065f46;        /* hijau brand misalnya */
+}
+
+/* Varian secondary */
+.btn.secondary {
+  background:#def7ec;   /* hijau muda */
+  color:#065f46;
+}
+.btn.secondary:hover,
+.btn.secondary:focus-visible {
+  background:#a7f3d0;   /* hijau lebih gelap */
+  color:#064e3b;
+}
+
+/* StepCard */
+.stepcard {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.stepcard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Thumbnail image effect */
+.stepcard .thumb {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.stepcard:hover .thumb {
+  transform: scale(1.05);
+}
+
+.stepcard .pad {
+  padding: 16px;
+}
+
+.stepcard h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.stepcard p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+
+.chip {
+    background: #05b368;
+    border: 1px solid #e5e7eb;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+}

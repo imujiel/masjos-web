@@ -1,0 +1,101 @@
+/* =========================
+   METHODS: daftar chip + panel detail
+   ========================= */
+
+/* Daftar metode (chips) */
+.methods{
+  display:flex; flex-wrap:wrap; gap:12px;
+  margin:0 0 20px; padding:0; list-style:none;
+}
+.methods .method{
+  padding:10px 18px;
+  background:#f9fafb;
+  border-radius:10px;
+  font-weight:500; color:#374151;
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.methods .method:hover{
+  background:#def7ec; color:#047857;
+  transform:translateY(-3px);
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.methods .method.is-active{
+  background:#def7ec; color:#065f46; font-weight:700;
+}
+
+/* Panel detail (grid: gambar + teks) */
+.method-detail{
+  display:grid;
+  grid-template-columns:1fr;       /* mobile = 1 kolom */
+  gap:16px;
+  margin-top:12px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  overflow:hidden;
+  animation:fadeUp .4s ease;
+}
+
+/* Gambar di panel (besar & tajam) */
+.method-detail__img{
+  width:100%;
+  height:320px;                    /* tinggi besar di mobile */
+  object-fit:cover;                /* isi penuh tanpa gepeng */
+  display:block;
+  background:#e6f4ea;
+  cursor:pointer;                  /* bisa diklik (lightbox) */
+  transition:transform .3s ease;
+}
+.method-detail__img:hover{
+  transform:scale(1.02);
+}
+
+/* Isi teks panel */
+.method-detail__body{ padding:14px }
+.method-detail__body h3{ margin:0 0 8px; font-size:20px }
+.method-detail__list{ margin:6px 0 10px; padding-left:18px; line-height:1.6 }
+.method-detail__tips{
+  margin:0;
+  background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0;
+  padding:8px 10px; border-radius:10px; font-weight:600;
+}
+
+/* Desktop: gambar lebih lebar & tinggi */
+@media (min-width:800px){
+  .method-detail{
+    grid-template-columns:1.3fr 1fr;  /* gambar : teks */
+  }
+  .method-detail__img{
+    height:420px;
+  }
+}
+
+/* =========================
+   LIGHTBOX (gambar diklik)
+   ========================= */
+.img-modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.8);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1000;
+}
+.img-modal__content{
+  max-width:90%; max-height:90%;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,.5);
+  animation:zoomIn .3s ease;
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(15px); }
+  to  { opacity:1; transform:translateY(0); }
+}
+@keyframes zoomIn{
+  from{ transform:scale(.8); opacity:0; }
+  to  { transform:scale(1);  opacity:1; }
+}

@@ -1,0 +1,46 @@
+:root{
+  --brand:#0FA36B;        /* hijau tegas */
+  --brand-dark:#0B5F44;
+  --info:#2A7DE1;         /* biru peta */
+  --accent:#F59E0B;       /* oranye CTA sekunder */
+  --danger:#E11D48;       /* B3/peringatan */
+  --text:#111827;
+  --muted:#6B7280;
+  --card:#F3F4F6;
+  --bg:#FFFFFF;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* Smooth scroll untuk semua anchor (#hash) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hormati user yang menonaktifkan animasi */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Jika navbar kamu fixed, beri offset supaya judul bagian tidak ketutup */
+#steps {
+  scroll-margin-top: 60px; /* sesuaikan dgn tinggi navbar: 56–96px */
+}
+
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+h1,h2,h3{margin:0 0 .5rem}
+p{margin:0 0 1rem;line-height:1.65}
+
+.container{max-width:1140px;margin-inline:auto;padding-inline:16px}
+.section{padding-block:36px}
+@media (min-width:768px){ .section{padding-block:56px} }
+
+.btn{display:inline-block;padding:12px 18px;border-radius:999px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;box-shadow:var(--shadow)}
+.btn.secondary{background:#fff;color:var(--brand-dark);border:2px solid #bde5d7}
+.btn.white{background:#fff;color:#111827}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:#ffffffd9;border:1px solid #e5e7eb;padding:6px 10px;border-radius:999px;font-weight:600;font-size:14px}
+.muted{color:var(--muted)}
